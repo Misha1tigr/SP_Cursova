@@ -1,0 +1,39 @@
+From 2dc8b9d43ef7261ecb77f5ad925c0d3d9c1b14b8 Mon Sep 17 00:00:00 2001
+From: Sergii Piatakov <sergii.piatakov@globallogic.com>
+Date: Thu, 15 Nov 2018 15:28:04 +0200
+Subject: [PATCH 1/2] fix truncation error
+
+To convert float to integer the truncation is performed, but the
+rounding is expected.
+
+Test: Add (4.9, 4.9) should return 10.
+Signed-off-by: Sergii Piatakov <sergii.piatakov@globallogic.com>
+---
+ calculator.cpp.orig | 15 +++++++++++++++
+ 1 file changed, 15 insertions(+)
+ create mode 100644 calculator.cpp.orig
+
+diff --git a/calculator.cpp.orig b/calculator.cpp.orig
+new file mode 100644
+index 0000000..34f8d05
+--- /dev/null
++++ b/calculator.cpp.orig
+@@ -0,0 +1,15 @@
++#include "calculator.h"
++
++int Calculator::Add (double a, double b)
++{
++<<<<<<< HEAD
++    return a + b;
++=======
++	return a + b + 0.5;
++>>>>>>> 4ad40a3 (fix truncation error)
++}
++
++int Calculator::Sub (double a, double b)
++{
++    return Add (a, -b);
++}
+-- 
+2.34.1
+
